@@ -35,11 +35,9 @@
 
 			if (turn.autoplay) {
 				let target = turn.owner.adversary.list[0];
-				target.get_stat('Vie').current -= turn.get_stat('Dégâts').value();
+				turn.get_spell('Griffe').use(target);
 
 				message = turn.name + ' attaque ' + target.name;
-
-				turn.atb = 0;
 			}
 		}
 	}
@@ -51,12 +49,12 @@
 	<div id="container">
 		<div>
 			{#each battle.player.list as character}
-				<Display bind:character />
+				<Display bind:character bind:spell={select} {next} />
 			{/each}
 		</div>
 		<div>
 			{#each battle.bot.list as character}
-				<Display bind:character />
+				<Display bind:character bind:spell={select} {next} />
 			{/each}
 		</div>
 	</div>
@@ -64,6 +62,12 @@
 	<div id="message">
 		{#if turn.autoplay}
 			{message}
+			<br />
+			<button
+				on:click={() => {
+					next();
+				}}>Ok</button
+			>
 		{:else}
 			{#each turn.spells as spell}
 				{#if spell == select}

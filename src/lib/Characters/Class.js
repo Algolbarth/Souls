@@ -89,5 +89,7 @@ class Spell {
 
     description = undefined;
 
-
+    target = function (character) {
+        return false;
+    };
 }
