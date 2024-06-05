@@ -1,0 +1,56 @@
+<script>
+	export let page;
+	export let battle;
+	export let characters;
+	export let teams;
+
+	function new_battle () {
+		battle = {
+			player : {
+				list : []
+			},
+			bot : {
+				list : []
+			}
+		};
+
+		battle.player.adversary = battle.bot;
+		battle.bot.adversary = battle.player;
+
+		battle.player.list = teams[0];
+
+		battle.bot.list.push(characters.get("Loup"));
+
+		for (const character of battle.player.list) {
+			character.owner = battle.player;
+		}
+
+		for (const character of battle.bot.list) {
+			character.owner = battle.bot;
+			character.autoplay = true;
+		}
+
+		for (const camp of [battle.player, battle.bot]) {
+			for (const character of camp.list) {
+				character.atb = 0;
+				character.get_stat("Vie").current = character.get_stat("Vie").value();
+				character.get_stat("Bouclier").current = character.get_stat("Bouclier").value();
+				character.get_stat("Énergie").current = character.get_stat("Énergie").value();
+			}
+		}
+	};	
+</script>
+
+<button
+	on:click={() => {
+		page = 'Menu';
+	}}>Retour</button
+>
+<br />
+<br />
+<button
+	on:click={() => {
+		new_battle();
+		page = 'Battle';
+	}}>Combattre</button
+>
