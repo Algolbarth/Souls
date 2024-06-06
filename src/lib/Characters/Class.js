@@ -61,6 +61,27 @@ export class Character {
             return undefined;
         }
     };
+
+    alive = function () {
+        if (this.get_stat('Vie').current > 0) {
+            return true;
+        }
+        return false;
+    };
+
+    damage = function (value) {
+        value -= this.get_stat("Armure").value();
+        if (this.get_stat("Bouclier").current > value) {
+            this.get_stat("Bouclier").current -= value;
+            value = 0;
+        }
+        else {
+            value -= this.get_stat("Bouclier").current;
+            this.get_stat("Bouclier").current = 0;
+        }
+        
+        this.get_stat('Vie').current -= value;
+    };
 }
 
 class Stat {

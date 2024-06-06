@@ -17,8 +17,8 @@ export class Loup extends Character {
             return false;
         };
         this.get_spell("Griffe").use = function (character) {
-            character.get_stat('Vie').current -= this.owner.get_stat('Dégâts').value();
-            this.owner.atb = 0;
+            character.damage(this.owner.get_stat('Dégâts').value());
+            return this.owner.name + ' utilise Griffe sur ' + character.name;
         };
 
         this.add_spell("Hurlement");
@@ -31,9 +31,9 @@ export class Loup extends Character {
         };
         this.get_spell("Hurlement").use = function () {
             for (const character of this.owner.owner.list) {
-                character.get_stat('Dégâts').current += 10;
+                character.get_stat('Dégâts').add += 10;
             }
-            this.owner.atb = 0;
+            return this.owner.name + ' utilise Hurlement !';
         };
     }
 }

@@ -23,11 +23,12 @@
 
 		for (const character of battle.player.list) {
 			character.owner = battle.player;
+			character.can_autoplay = false;
 		}
 
 		for (const character of battle.bot.list) {
 			character.owner = battle.bot;
-			character.autoplay = true;
+			character.can_autoplay = true;
 		}
 
 		for (const camp of [battle.player, battle.bot]) {

@@ -3,97 +3,117 @@
 	export let page;
 	export let battle;
 
-	$: isFinish = function () {
-		return false;
-	};
-
-	$: isVictory = function () {
+	$: isDefeat = function () {
+		for (const character of battle.player.list) {
+			if (character.alive()) {
+				return false;
+			}
+		}
 		return true;
 	};
 
-	let turn = undefined;
-	let select = undefined;
+	$: isVictory = function () {
+		for (const character of battle.bot.list) {
+			if (character.alive()) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+	let active = undefined;
+	let spell = undefined;
 	let message = undefined;
 
 	function next() {
-		let priority = undefined;
+		active = undefined;
 
 		for (const camp of [battle.player, battle.bot]) {
 			for (const character of camp.list) {
-				character.atb += character.get_stat('Vitesse').value() / 100;
-				if (character.atb >= 100 && (priority == undefined || priority.atb < character.atb)) {
-					priority = character;
+				if (
+					character.alive() &&
+					character.atb >= 100 &&
+					(active == undefined || active.atb < character.atb)
+				) {
+					active = character;
 				}
 			}
 		}
 
-		if (priority == undefined) {
-			select = undefined;
-			next();
-		} else {
-			turn = priority;
-
-			if (turn.autoplay) {
-				let target = turn.owner.adversary.list[0];
-				turn.get_spell('Griffe').use(target);
-
-				message = turn.name + ' attaque ' + target.name;
+		if (active == undefined) {
+			for (const camp of [battle.player, battle.bot]) {
+				for (const character of camp.list) {
+					if (character.alive()) {
+						character.atb += character.get_stat('Vitesse').value() / 100;
+					}
+				}
 			}
+
+			next();
+		} else if (active.can_autoplay) {
+			active.atb = 0;
+
+			let target = active.owner.adversary.list[0];
+			message = active.get_spell('Griffe').use(target);
+
+			target.name += "!"
 		}
 	}
 
 	next();
 </script>
 
-{#if !isFinish()}
+{#if !isVictory() && !isDefeat()}
 	<div id="container">
 		<div>
 			{#each battle.player.list as character}
-				<Display bind:character bind:spell={select} {next} />
+				<Display bind:character bind:spell bind:active bind:message />
 			{/each}
 		</div>
 		<div>
 			{#each battle.bot.list as character}
-				<Display bind:character bind:spell={select} {next} />
+				<Display bind:character bind:spell bind:active bind:message />
 			{/each}
 		</div>
 	</div>
 
 	<div id="message">
-		{#if turn.autoplay}
+		{#if message != undefined}
 			{message}
 			<br />
 			<button
 				on:click={() => {
+					message = undefined;
 					next();
 				}}>Ok</button
 			>
 		{:else}
-			{#each turn.spells as spell}
-				{#if spell == select}
+			{#each active.spells as s}
+				{#if spell == s}
 					<button
 						on:click={() => {
-							select = spell;
-						}}>{spell.name}</button
+							spell = s;
+						}}>{s.name}</button
 					>
 				{:else}
 					<button
 						on:click={() => {
-							select = spell;
-						}}>{spell.name}</button
+							spell = s;
+						}}>{s.name}</button
 					>
 				{/if}
 				<br />
 			{/each}
 
-			{#if select != undefined}
-				{select.name}
+			{#if spell != undefined}
 				<br />
-				<svelte:component this={select.description} bind:spell={select} />
+				{spell.name}
+				<br />
+				<svelte:component this={spell.description} bind:spell />
 			{/if}
 		{/if}
 	</div>
-{:else if isVictory()}
+{:else if !isDefeat() && isVictory()}
 	<button
 		on:click={() => {
 			page = 'Arena';
