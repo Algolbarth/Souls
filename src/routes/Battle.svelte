@@ -44,7 +44,7 @@
 			for (const camp of [battle.player, battle.bot]) {
 				for (const character of camp.list) {
 					if (character.alive()) {
-						character.atb += character.get_stat('Vitesse').value() / 100;
+						character.atb += parseFloat(character.get_stat('Vitesse').value() / 100).toFixed(2);
 					}
 				}
 			}

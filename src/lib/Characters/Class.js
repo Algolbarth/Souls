@@ -6,7 +6,7 @@ export class Character {
 
     constructor () {
         this.add_stat("Vie", 100);
-        this.add_stat("Bouclier", 100);
+        this.add_stat("Bouclier", 0);
         this.add_stat("Armure", 50);
         this.add_stat("Énergie", 100);
         this.add_stat("Dégâts", 100);
@@ -86,6 +86,7 @@ export class Character {
 
 class Stat {
     current = undefined;
+    add = 0;
     
     constructor (name, base, owner) {
         this.name = name;
@@ -94,7 +95,7 @@ class Stat {
     };
 
     value = function () {
-        return this.base;
+        return this.base + this.add;
     };
 
     reset = function () {

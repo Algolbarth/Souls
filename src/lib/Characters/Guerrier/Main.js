@@ -8,6 +8,8 @@ export class Guerrier extends Character {
     constructor () {
         super();
 
+        this.get_stat("Vitesse").base = 80;
+
         this.add_spell("Coup d'épée");
         this.get_spell("Coup d'épée").description = CoupDEpee;
         this.get_spell("Coup d'épée").select = function (character) {

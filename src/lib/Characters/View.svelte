@@ -20,8 +20,10 @@
 	<br />
 	<div id="stats">
 		{#each character.stats as stat}
-			{stat.name} : {stat.value()}
-			<br />
+			{#if stat.value() > 0}
+				{stat.name} : {stat.value()}
+				<br />
+			{/if}
 		{/each}
 	</div>
 </div>
