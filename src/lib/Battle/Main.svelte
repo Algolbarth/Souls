@@ -117,6 +117,10 @@
 		{/if}
 	</div>
 {:else if !isDefeat() && isVictory()}
+	+ 5 rangs
+	<br/>
+	+ 3 médailles
+	<br/>
 	<button
 		on:click={() => {
 			ranking += 5;

@@ -20,7 +20,8 @@
 	characters.add('Loup');
 
 	teams.push({name : "Équipe", list : [characters.list[0], characters.list[1]]});
-	let team = teams[0];
+	let team_active = teams[0];
+	let team_view = undefined;
 </script>
 
 <div id="body">
@@ -29,13 +30,13 @@
 	{:else if page == 'Arena'}
 		<ArenaView bind:page bind:battle bind:characters bind:teams bind:ranking bind:medals />
 	{:else if page == 'Teams'}
-		<TeamsView bind:page bind:teams bind:team />
+		<TeamsView bind:page bind:teams bind:team_active bind:team_view />
 	{:else if page == 'Edit'}
-		<EditView bind:page bind:team />
+		<EditView bind:page bind:team={team_view} />
 	{:else if page == 'Add'}
-		<AddView bind:page bind:team bind:characters />
+		<AddView bind:page bind:team={team_view} bind:characters />
 	{:else if page == 'Battle'}
-		<BattleView bind:page bind:battle />
+		<BattleView bind:page bind:battle bind:ranking bind:medals />
 	{:else if page == 'Characters'}
 		<CharactersView bind:page bind:characters={characters.list} />
 	{/if}

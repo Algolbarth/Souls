@@ -3,14 +3,15 @@
     export let teams;
     export let index;
     export let team;
-    export let select;
+    export let team_active;
+    export let team_view;
 </script>
 
 <div id="body">
-    {#if team != select}
+    {#if team != team_active}
         <button
             on:click={() => {
-                select = team;
+                team_active = team;
             }}>{team.name}</button
         >
     {:else}
@@ -18,7 +19,7 @@
     {/if}
     <button
         on:click={() => {
-            select = team;
+            team_view = team;
             page = 'Edit';
         }}>Modifier</button
     >
