@@ -6,6 +6,7 @@
 <button
 	on:click={() => {
 		view = character;
+		view = view;
 	}}>{character.name} Nv {character.level}</button
 >
 <br />

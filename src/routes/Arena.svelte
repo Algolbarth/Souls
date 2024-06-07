@@ -3,6 +3,8 @@
 	export let battle;
 	export let characters;
 	export let teams;
+	export let ranking;
+	export let medals;
 
 	function new_battle() {
 		battle = {
@@ -17,7 +19,7 @@
 		battle.player.adversary = battle.bot;
 		battle.bot.adversary = battle.player;
 
-		battle.player.list = teams[0];
+		battle.player.list = teams[0].list;
 
 		battle.bot.list.push(characters.get('Loup'));
 
@@ -54,12 +56,18 @@
 >
 <br />
 <br />
+{ranking} points
+<br />
+{medals} médailles
+<br />
+<br />
 <button
 	on:click={() => {
 		new_battle();
 		page = 'Battle';
 	}}>Combattre</button
 >
+<br />
 <br />
 <button
 	on:click={() => {

@@ -2,6 +2,8 @@
 	import Display from './Display.svelte';
 	export let page;
 	export let battle;
+	export let ranking;
+	export let medals;
 
 	$: isDefeat = function () {
 		for (const character of battle.player.list) {
@@ -117,12 +119,18 @@
 {:else if !isDefeat() && isVictory()}
 	<button
 		on:click={() => {
+			ranking += 5;
+			medals += 3;
 			page = 'Arena';
 		}}>Victoire</button
 	>
 {:else}
 	<button
 		on:click={() => {
+			ranking -= 5;
+			if (ranking < 0) {
+				ranking = 0;
+			}
 			page = 'Arena';
 		}}>Défaite</button
 	>
