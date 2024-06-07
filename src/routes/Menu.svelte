@@ -13,3 +13,15 @@
 		page = 'Characters';
 	}}>Personnages</button
 >
+<br />
+<button
+	on:click={() => {
+		page = 'Inventory';
+	}}>Inventaire</button
+>
+<br />
+<button
+	on:click={() => {
+		page = 'Shop';
+	}}>Boutique</button
+>

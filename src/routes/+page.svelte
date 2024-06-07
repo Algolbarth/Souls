@@ -6,7 +6,9 @@
 	import AddView from '../lib/Teams/Add.svelte';
 	import BattleView from '../lib/Battle/Main.svelte';
 	import CharactersView from '../lib/Characters/List.svelte';
-	
+	import ShopView from './Shop.svelte';
+	import InventoryView from './Inventory.svelte';
+
 	import { Characters } from '../lib/Characters/Stockage.js';
 
 	let page = 'Menu';
@@ -19,9 +21,11 @@
 	characters.add('Guerrier');
 	characters.add('Loup');
 
-	teams.push({name : "Équipe", list : [characters.list[0], characters.list[1]]});
+	teams.push({ name: 'Équipe', list: [characters.list[0], characters.list[1]] });
 	let team_active = teams[0];
 	let team_view = undefined;
+
+	let inventory = [];
 </script>
 
 <div id="body">
@@ -39,6 +43,10 @@
 		<BattleView bind:page bind:battle bind:ranking bind:medals />
 	{:else if page == 'Characters'}
 		<CharactersView bind:page bind:characters={characters.list} />
+	{:else if page == 'Inventory'}
+		<InventoryView bind:page bind:inventory />
+	{:else if page == 'Shop'}
+		<ShopView bind:page bind:medals />
 	{/if}
 </div>
 
