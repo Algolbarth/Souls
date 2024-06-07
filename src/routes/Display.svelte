@@ -15,6 +15,7 @@
 				active.atb = 0;
 				message = spell.use(character);
 				spell = undefined;
+				
 				character = character;
 			}}>{character.name}</button
 		>

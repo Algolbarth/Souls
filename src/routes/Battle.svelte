@@ -44,7 +44,8 @@
 			for (const camp of [battle.player, battle.bot]) {
 				for (const character of camp.list) {
 					if (character.alive()) {
-						character.atb += parseFloat(character.get_stat('Vitesse').value() / 100).toFixed(2);
+						character.atb += character.get_stat('Vitesse').value() / 100;
+						character.atb = parseFloat((character.atb).toFixed(2));
 					}
 				}
 			}
@@ -56,7 +57,7 @@
 			let target = active.owner.adversary.list[0];
 			message = active.get_spell('Griffe').use(target);
 
-			target.name += "!"
+			battle = battle;
 		}
 	}
 
