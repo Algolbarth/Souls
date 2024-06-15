@@ -3,6 +3,7 @@
 
 	export let equipment;
 	export let equipments;
+	export let character = undefined;
 
 	let view = undefined;
 </script>
@@ -29,6 +30,8 @@
 			on:click={() => {
 				equipment.bearer.unequip(equipment.slot);
 				equipment = undefined;
+
+				character = character;
 			}}>Enlever</button
 		>
 		<br />

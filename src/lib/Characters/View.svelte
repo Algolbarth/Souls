@@ -65,7 +65,7 @@
 
 {#if view != undefined}
 	<div id="view">
-		<View bind:equipment={view} />
+		<View bind:equipment={view} bind:equipments bind:character/>
 	</div>
 {/if}
 
