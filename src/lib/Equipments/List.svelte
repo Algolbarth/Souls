@@ -1,9 +1,7 @@
 <script>
-	import Icon from './Icon.svelte';
 	import View from './View.svelte';
 	export let page;
-	export let characters = [];
-	export let equipments = [];
+	export let equipments;
 
 	let view = undefined;
 </script>
@@ -15,13 +13,20 @@
 >
 <br />
 <br />
-{#each characters as character}
-	<Icon bind:character bind:view />
+{#each equipments.list as equipment}
+	<button
+		on:click={() => {
+			view = equipment;
+		}}
+	>
+		{equipment.name} Nv {equipment.level}
+	</button>
+	<br />
 {/each}
 
 {#if view != undefined}
 	<div id="view">
-		<View bind:character={view} bind:equipments/>
+		<View bind:equipment={view} bind:equipments />
 	</div>
 {/if}
 

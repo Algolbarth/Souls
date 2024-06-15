@@ -4,7 +4,7 @@
 	export let characters;
 	export let teams;
 	export let ranking;
-	export let medals;
+	export let inventory;
 
 	function new_battle() {
 		battle = {
@@ -56,9 +56,14 @@
 >
 <br />
 <br />
-{ranking} points
+{ranking} Points
 <br />
-{medals} médailles
+{#if inventory.get("Médaille") != undefined}
+	{inventory.get("Médaille").number}
+{:else}
+	0
+{/if}
+Médailles
 <br />
 <br />
 <button

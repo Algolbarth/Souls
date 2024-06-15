@@ -3,14 +3,19 @@ export class Character {
     stats = [];
     atb = undefined;
     spells = [];
+    equipments = [];
 
-    constructor () {
+    constructor() {
         this.add_stat("Vie", 100);
         this.add_stat("Bouclier", 0);
         this.add_stat("Armure", 50);
         this.add_stat("Énergie", 100);
         this.add_stat("Dégâts", 100);
         this.add_stat("Vitesse", 100);
+
+        for (let i = 0; i < 6; i++) {
+            this.equipments.push(undefined);
+        }
     };
 
     get_stat = function (name) {
@@ -20,7 +25,7 @@ export class Character {
                 value = stat;
             }
         }
-        
+
         if (value != undefined) {
             return value;
         }
@@ -52,7 +57,7 @@ export class Character {
                 value = spell;
             }
         }
-        
+
         if (value != undefined) {
             return value;
         }
@@ -60,6 +65,19 @@ export class Character {
             console.log(name + " spell doesnt exist");
             return undefined;
         }
+    };
+
+    equip = function (equipment) {
+        if (this.equipments[equipment.slot] != undefined) {
+            this.unequip(equipment.slot);
+        }
+        this.equipments[equipment.slot] = equipment;
+        equipment.bearer = this;
+    };
+
+    unequip = function (slot) {
+        this.equipments[slot].bearer = undefined;
+        this.equipments[slot] = undefined;
     };
 
     alive = function () {
@@ -79,7 +97,7 @@ export class Character {
             value -= this.get_stat("Bouclier").current;
             this.get_stat("Bouclier").current = 0;
         }
-        
+
         this.get_stat('Vie').current -= value;
     };
 }
@@ -87,15 +105,23 @@ export class Character {
 class Stat {
     current = undefined;
     add = 0;
-    
-    constructor (name, base, owner) {
+
+    constructor(name, base, owner) {
         this.name = name;
         this.base = base;
         this.owner = owner;
     };
 
     value = function () {
-        return this.base + this.add;
+        let total = this.base + this.add;
+
+        for (const equipment of this.owner.equipments) {
+            if (equipment != undefined && equipment.stat.name == this.name) {
+                total += equipment.stat.value;
+            }
+        }
+
+        return total;
     };
 
     reset = function () {
@@ -104,7 +130,7 @@ class Stat {
 }
 
 class Spell {
-    constructor (name, owner) {
+    constructor(name, owner) {
         this.name = name;
         this.owner = owner;
     }

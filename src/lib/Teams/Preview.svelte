@@ -42,6 +42,6 @@
 <style>
 	#body {
 		border: 3px black solid;
-		padding: 1%;
+		padding: 8px;
 	}
 </style>

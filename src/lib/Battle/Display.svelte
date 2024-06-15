@@ -36,7 +36,7 @@
 		{/if}
 		{character.get_stat('Énergie').current} / {character.get_stat('Énergie').value()} PE
 		<br />
-		{character.atb} % ATB
+		{character.atb} % PI
 	{:else}
 		Mort
 	{/if}
@@ -45,7 +45,7 @@
 <style>
 	#body {
 		border: 3px solid black;
-		padding: 1%;
+		padding: 8px;
 	}
 
 	#body.yellow {

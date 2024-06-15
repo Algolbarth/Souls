@@ -5,11 +5,11 @@ export class Characters {
     instances = [];
     classes = [];
 
-    constructor () {
+    constructor() {
         for (const c of Object.keys(C)) {
             let character_class = C[c];
             this.classes.push(character_class);
-    
+
             let character = new character_class();
             this.instances.push(character);
         }

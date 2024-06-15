@@ -3,7 +3,7 @@
 	export let page;
 	export let battle;
 	export let ranking;
-	export let medals;
+	export let inventory;
 
 	$: isDefeat = function () {
 		for (const character of battle.player.list) {
@@ -124,14 +124,14 @@
 	<button
 		on:click={() => {
 			ranking += 5;
-			medals += 3;
+			inventory.add("Médaille", 3);
 			page = 'Arena';
 		}}>Victoire</button
 	>
 {:else}
 	<button
 		on:click={() => {
-			ranking -= 5;
+			ranking -= 25;
 			if (ranking < 0) {
 				ranking = 0;
 			}
@@ -148,6 +148,6 @@
 
 	#message {
 		border: solid;
-		padding: 1%;
+		padding: 8px;
 	}
 </style>

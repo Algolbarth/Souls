@@ -10,8 +10,14 @@
 <br />
 <button
 	on:click={() => {
-		page = 'Characters';
+		page = 'Character';
 	}}>Personnages</button
+>
+<br />
+<button
+	on:click={() => {
+		page = 'Equipment';
+	}}>Équipements</button
 >
 <br />
 <button
@@ -24,4 +30,10 @@
 	on:click={() => {
 		page = 'Shop';
 	}}>Boutique</button
+>
+<br />
+<button
+	on:click={() => {
+		page = 'Summon';
+	}}>Invocations</button
 >
