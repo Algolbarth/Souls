@@ -1,8 +1,9 @@
 export class Equipment {
     bearer = undefined;
     
-    constructor (level = 1, slot = parseInt(Math.random()*6)) {
+    constructor (level = 1, rank = 1, slot = parseInt(Math.random()*6)) {
         this.level = level;
+        this.rank = rank;
         this.slot = slot;
 
         this.name = ["Arme", "Bouclier", "Casque", "Plastron", "Gants", "Bottes"][this.slot];

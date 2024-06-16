@@ -1,5 +1,7 @@
 <script>
 	import View from './View.svelte';
+	import Icon from './Icon.svelte';
+
 	export let page;
 	export let equipments;
 
@@ -19,7 +21,7 @@
 			view = equipment;
 		}}
 	>
-		{equipment.name} Nv {equipment.level}
+		<Icon bind:equipment />
 	</button>
 	<br />
 {/each}

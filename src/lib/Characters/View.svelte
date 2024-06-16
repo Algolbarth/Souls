@@ -1,6 +1,7 @@
 <script>
 	import View from '../Equipments/View.svelte';
 	import Select from '../Equipments/Select.svelte';
+	import Icon from '../Equipments/Icon.svelte';
 
 	export let character;
 	export let equipments;
@@ -49,8 +50,10 @@
 				<button
 					on:click={() => {
 						view = equipment;
-					}}>{equipment.name} Nv {equipment.level}</button
+					}}
 				>
+					<Icon bind:equipment />
+				</button>
 			{:else}
 				<button
 					on:click={() => {
@@ -65,13 +68,13 @@
 
 {#if view != undefined}
 	<div id="view">
-		<View bind:equipment={view} bind:equipments bind:character/>
+		<View bind:equipment={view} bind:equipments bind:character />
 	</div>
 {/if}
 
 {#if slot != undefined}
 	<div id="select">
-		<Select bind:character bind:slot bind:equipments/>
+		<Select bind:character bind:slot bind:equipments />
 	</div>
 {/if}
 
