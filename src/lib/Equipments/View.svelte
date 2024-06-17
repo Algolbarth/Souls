@@ -10,6 +10,7 @@
 
 <div id="body">
 	<button
+		class="classic"
 		on:click={() => {
 			equipment = undefined;
 		}}>Fermer</button
@@ -27,6 +28,7 @@
 			}}>{equipment.bearer.name}</button
 		>
 		<button
+			class="classic"
 			on:click={() => {
 				equipment.bearer.unequip(equipment.slot);
 				equipment = undefined;
@@ -65,6 +67,6 @@
 		left: 25vw;
 		top: 5vh;
 
-		background: grey;
+		background: darkgray;
 	}
 </style>

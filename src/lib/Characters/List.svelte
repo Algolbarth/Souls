@@ -1,6 +1,7 @@
 <script>
 	import Icon from './Icon.svelte';
 	import View from './View.svelte';
+
 	export let page;
 	export let characters = [];
 	export let equipments = [];
@@ -16,12 +17,17 @@
 <br />
 <br />
 {#each characters as character}
-	<Icon bind:character bind:view />
+	<button
+		on:click={() => {
+			view = character;
+		}}><Icon bind:character /></button
+	>
+	<br />
 {/each}
 
 {#if view != undefined}
 	<div id="view">
-		<View bind:character={view} bind:equipments/>
+		<View bind:character={view} bind:equipments />
 	</div>
 {/if}
 
@@ -33,6 +39,6 @@
 		left: 25vw;
 		top: 5vh;
 
-		background: grey;
+		background: darkgray;
 	}
 </style>

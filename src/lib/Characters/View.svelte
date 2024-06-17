@@ -15,6 +15,7 @@
 
 <div id="body">
 	<button
+		class="classic"
 		on:click={() => {
 			character = undefined;
 		}}>Fermer</button
@@ -26,13 +27,17 @@
 	<br />
 	{#each character.spells as s, i}
 		<button
+			class="classic"
 			on:click={() => {
 				spell_index = i;
 			}}>{s.name}</button
 		>
-		<br />
 	{/each}
-	<svelte:component this={spell.description} bind:spell />
+	<br />
+	<br />
+	<div id="spell">
+		<svelte:component this={spell.description} bind:spell />
+	</div>
 	<br />
 	<br />
 	<div id="stats">
@@ -48,6 +53,7 @@
 		{#each character.equipments as equipment, i}
 			{#if equipment != undefined}
 				<button
+					class="equipment"
 					on:click={() => {
 						view = equipment;
 					}}
@@ -56,12 +62,12 @@
 				</button>
 			{:else}
 				<button
+					class="equipment"
 					on:click={() => {
 						slot = i;
 					}}>Vide</button
 				>
 			{/if}
-			<br />
 		{/each}
 	</div>
 </div>
@@ -84,12 +90,20 @@
 		text-align: center;
 	}
 
+	#spell {
+		border: solid 2px black;
+		padding: 8px;
+	}
+
 	#stats {
 		text-align: left;
 	}
 
 	#equipments {
 		text-align: left;
+
+		display:grid;
+		grid-template-columns: repeat(3, 1fr);
 	}
 
 	#view {
@@ -99,7 +113,7 @@
 		left: 25vw;
 		top: 5vh;
 
-		background: grey;
+		background: darkgray;
 	}
 
 	#select {
@@ -110,5 +124,13 @@
 		top: 0;
 
 		background: white;
+	}
+
+	.equipment {
+		border: solid black 2px;
+		background: lightgray;
+
+		margin: 5px;
+		padding: 5px;
 	}
 </style>

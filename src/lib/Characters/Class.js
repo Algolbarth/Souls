@@ -46,8 +46,8 @@ export class Character {
         this.stats.push(new Stat(name, base, this));
     };
 
-    add_spell = function (name) {
-        this.spells.push(new Spell(name, this));
+    add_spell = function (spell) {
+        this.spells.push(new spell(this));
     };
 
     get_spell = function (name) {
@@ -126,18 +126,5 @@ class Stat {
 
     reset = function () {
         this.current = undefined;
-    };
-}
-
-class Spell {
-    constructor(name, owner) {
-        this.name = name;
-        this.owner = owner;
-    }
-
-    description = undefined;
-
-    target = function (character) {
-        return false;
     };
 }

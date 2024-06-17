@@ -49,7 +49,7 @@
 	{:else if page == 'Battle'}
 		<BattleView bind:page bind:battle bind:ranking bind:inventory />
 	{:else if page == 'Character'}
-		<CharactersView bind:page bind:characters={characters.list} bind:equipments={equipments.list}/>
+		<CharactersView bind:page bind:characters={characters.list} bind:equipments={equipments.list} />
 	{:else if page == 'Equipment'}
 		<EquipmentsView bind:page bind:equipments />
 	{:else if page == 'Inventory'}
@@ -77,5 +77,27 @@
 		padding: 0;
 
 		cursor: pointer;
+	}
+
+	:global(button.classic) {
+		background: grey;
+		padding: 5px;
+		margin: 5px;
+	}
+
+	:global(button.close) {
+		background: red;
+		color: white;
+
+		width: 20px;
+		height: 20px;
+	}
+
+	:global(button.add) {
+		background: blue;
+		color: white;
+
+		width: 20px;
+		height: 20px;
 	}
 </style>

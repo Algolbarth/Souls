@@ -20,6 +20,6 @@
 	#body {
 		padding: 8px;
 		text-align: center;
-		background: grey;
+		background: darkgray;
 	}
 </style>

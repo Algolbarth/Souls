@@ -1,4 +1,6 @@
 <script>
+	import Icon from '../Characters/Icon.svelte';
+
 	export let page;
 	export let team;
 	export let characters;
@@ -13,12 +15,14 @@
 <br />
 {#each characters.list as character}
 	{#if team.list.includes(character)}
-		{character.name}
+		<Icon bind:character />
 	{:else}
-		<button on:click={() => {
-            team.list.push(character);
-            page = "Edit";
-        }}>{character.name}</button>
+		<button
+			on:click={() => {
+				team.list.push(character);
+				page = 'Edit';
+			}}><Icon bind:character /></button
+		>
 	{/if}
-    <br/>
+	<br />
 {/each}

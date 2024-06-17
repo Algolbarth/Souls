@@ -5,7 +5,7 @@
 	export let message;
 
 	$: alive = character.alive();
-	$: can_be_target = alive && spell != undefined && spell.select(character);
+	$: can_be_target = alive && spell != undefined && spell.condition() && spell.select(character);
 </script>
 
 <div id="body" class={(active == character ? 'yellow' : '') + ' ' + (can_be_target ? 'green' : '')}>

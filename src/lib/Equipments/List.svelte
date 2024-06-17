@@ -40,6 +40,6 @@
 		left: 25vw;
 		top: 5vh;
 
-		background: grey;
+		background: darkgray;
 	}
 </style>

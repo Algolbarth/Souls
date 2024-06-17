@@ -1,4 +1,6 @@
 <script>
+	import Icon from '../Characters/Icon.svelte';
+
 	export let page;
 	export let team;
 </script>
@@ -10,20 +12,33 @@
 >
 <br />
 <br />
-{team.name}
-<br />
-{#each team.list as character, i}
-	{character.name}
-	<button
-		on:click={() => {
-			team.list.splice(i, 1);
-            team = team;
-		}}>x</button
-	>
+<div id="body">
+	{team.name}
 	<br />
-{/each}
-{#if team.list.length < 5}
-	<button on:click={() => {
-		page = 'Add';
-	}}>+</button>
-{/if}
+	{#each team.list as character, i}
+		<Icon bind:character />
+		<button
+			class="close"
+			on:click={() => {
+				team.list.splice(i, 1);
+				team = team;
+			}}>x</button
+		>
+		<br />
+	{/each}
+	{#if team.list.length < 5}
+		<button
+			class="add"
+			on:click={() => {
+				page = 'Add';
+			}}>+</button
+		>
+	{/if}
+</div>
+
+<style>
+	#body {
+		border: solid 3px black;
+		padding: 8px;
+	}
+</style>
