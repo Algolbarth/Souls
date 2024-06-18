@@ -1,6 +1,7 @@
 import { Character } from '../Class.js';
 import { CoupDEpee } from './CoupDEpee/Class.js';
 import { Garde } from './Garde/Class.js';
+import { Tourbillon } from './Tourbillon/Class.js';
 
 export class Guerrier extends Character {
     name = "Guerrier";
@@ -12,5 +13,6 @@ export class Guerrier extends Character {
         
         this.add_spell(CoupDEpee);
         this.add_spell(Garde);
+        this.add_spell(Tourbillon);
     }
 }

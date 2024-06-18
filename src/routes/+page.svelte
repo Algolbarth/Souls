@@ -6,9 +6,10 @@
 	import AddView from '../lib/Teams/Add.svelte';
 	import BattleView from '../lib/Battle/Main.svelte';
 	import CharactersView from '../lib/Characters/List.svelte';
-	import ShopView from './Shop.svelte';
+	import ShopView from '../lib/Shop/List.svelte';
+	import ForgeView from '../lib/Forge/List.svelte';
 	import InventoryView from '../lib/Inventory/List.svelte';
-	import SummonView from './Summon.svelte';
+	import SummonView from '../lib/Summon/List.svelte';
 	import EquipmentsView from '../lib/Equipments/List.svelte';
 
 	import { Characters } from '../lib/Characters/Stockage.js';
@@ -20,8 +21,9 @@
 	let ranking = 0;
 
 	let characters = new Characters();
-	characters.add('Guerrier');
-	characters.add('Loup');
+	for (const instance of characters.instances) {
+		characters.add(instance.name);
+	}
 
 	let teams = [];
 	teams.push({ name: 'Équipe', list: [characters.list[0], characters.list[1]] });
@@ -55,9 +57,11 @@
 	{:else if page == 'Inventory'}
 		<InventoryView bind:page bind:inventory />
 	{:else if page == 'Shop'}
-		<ShopView bind:page bind:inventory bind:equipments />
+		<ShopView bind:page bind:inventory />
+	{:else if page == 'Forge'}
+		<ForgeView bind:page bind:inventory bind:equipments />
 	{:else if page == 'Summon'}
-		<SummonView bind:page bind:inventory bind:characters />
+		<SummonView bind:page bind:inventory bind:characters bind:equipments={equipments.list} />
 	{/if}
 </div>
 

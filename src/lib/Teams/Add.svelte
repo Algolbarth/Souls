@@ -15,7 +15,9 @@
 <br />
 {#each characters.list as character}
 	{#if team.list.includes(character)}
-		<Icon bind:character />
+		<div id="already_in_team">
+			<Icon bind:character />
+		</div>
 	{:else}
 		<button
 			on:click={() => {
@@ -23,6 +25,12 @@
 				page = 'Edit';
 			}}><Icon bind:character /></button
 		>
+		<br />
 	{/if}
-	<br />
 {/each}
+
+<style>
+	#already_in_team {
+		color: red;
+	}
+</style>

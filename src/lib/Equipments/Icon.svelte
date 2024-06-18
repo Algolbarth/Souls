@@ -2,4 +2,8 @@
     export let equipment;
 </script>
 
-{equipment.name} Nv {equipment.level}
+{equipment.name}
+{#each Array(equipment.rank) as _}
+    *
+{/each}
+Nv {equipment.level}

@@ -11,7 +11,7 @@ export class Equipments {
         this.list.push(equipment);
     };
 
-    new = function (level, slot) {
-        this.add(this.get(level, slot));
+    new = function (level, rank, slot) {
+        this.add(this.get(level, rank, slot));
     };
 }

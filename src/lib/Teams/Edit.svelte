@@ -26,6 +26,7 @@
 		>
 		<br />
 	{/each}
+	<br/>
 	{#if team.list.length < 5}
 		<button
 			class="add"

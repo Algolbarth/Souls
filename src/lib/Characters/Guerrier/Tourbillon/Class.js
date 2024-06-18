@@ -1,8 +1,8 @@
 import { Spell } from '../../Spell.js';
 import Description from './Description.svelte';
 
-export class Hurlement extends Spell {
-    name = "Hurlement";
+export class Tourbillon extends Spell {
+    name = "Tourbillon";
 
     constructor(owner) {
         super(owner);
@@ -18,19 +18,19 @@ export class Hurlement extends Spell {
     };
 
     select = function (character) {
-        if (this.owner.owner == character.owner) {
+        if (this.owner.owner != character.owner) {
             return true;
         }
         return false;
     };
 
-    use = function () {
-        for (const character of this.owner.owner.list) {
-            character.get_stat('Attaque').add += 10;
+    use = function (character) {
+        for (let i = 0; i < 3; i++) {
+            if (character.alive()) {
+                character.damage(this.owner.get_stat('Attaque').value());
+            }
         }
-        
-        this.owner.get_stat('Énergie').current -= 50;
 
-        return this.owner.name + ' utilise Hurlement sur lui et ses alliés';
+        return this.owner.name + " utilise Tourbillon sur " + character.name;
     };
 }

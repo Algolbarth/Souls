@@ -1,8 +1,8 @@
 import { Spell } from '../../Spell.js';
 import Description from './Description.svelte';
 
-export class Griffe extends Spell {
-    name = "Griffe";
+export class Baguette extends Spell {
+    name = "Baguette";
 
     constructor(owner) {
         super(owner);
@@ -18,8 +18,8 @@ export class Griffe extends Spell {
     };
 
     use = function (character) {
-        character.damage(this.owner.get_stat('Dégâts').value());
+        character.damage(this.owner.get_stat('Attaque').value());
         
-        return this.owner.name + ' utilise Griffe sur ' + character.name;
+        return this.owner.name + ' utilise Baguette sur ' + character.name;
     };
 }

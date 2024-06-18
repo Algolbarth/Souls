@@ -2,4 +2,4 @@
     export let spell;
 </script>
 
-Inflige {spell.owner.get_stat("Dégâts").value()} (100% dégâts) à une cible.
+Inflige {spell.owner.get_stat("Attaque").value()} (100% Attaque) à une cible.

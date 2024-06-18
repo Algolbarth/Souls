@@ -4,73 +4,76 @@
 	import Icon from '../Equipments/Icon.svelte';
 
 	export let character;
+	export let spell_index;
 	export let equipments;
 
-	let spell_index = 0;
 	$: spell = character.spells[spell_index];
 
 	let view = undefined;
 	let slot = undefined;
 </script>
 
-<div id="body">
-	<button
-		class="classic"
-		on:click={() => {
-			character = undefined;
-		}}>Fermer</button
-	>
-	<br />
-	<br />
-	{character.name} Nv {character.level}
-	<br />
-	<br />
-	{#each character.spells as s, i}
+<div id="window">
+	<div id="body">
 		<button
 			class="classic"
 			on:click={() => {
-				spell_index = i;
-			}}>{s.name}</button
+				character = undefined;
+			}}>Fermer</button
 		>
-	{/each}
-	<br />
-	<br />
-	<div id="spell">
-		<svelte:component this={spell.description} bind:spell />
-	</div>
-	<br />
-	<br />
-	<div id="stats">
-		{#each character.stats as stat}
-			{#if stat.value() > 0}
-				{stat.name} : {stat.value()}
-				<br />
-			{/if}
+		<br />
+		<br />
+		{character.name} Nv {character.level}
+		<br />
+		<br />
+		{#each character.spells as s, i}
+			<button
+				class="classic"
+				on:click={() => {
+					spell_index = i;
+				}}>{s.name}</button
+			>
 		{/each}
-	</div>
-	<br />
-	<div id="equipments">
-		{#each character.equipments as equipment, i}
-			{#if equipment != undefined}
-				<button
-					class="equipment"
-					on:click={() => {
-						view = equipment;
-					}}
-				>
-					<Icon bind:equipment />
-				</button>
-			{:else}
-				<button
-					class="equipment"
-					on:click={() => {
-						slot = i;
-					}}>Vide</button
-				>
-			{/if}
-		{/each}
+		<br />
+		<br />
+		<div id="spell">
+			<svelte:component this={spell.description} bind:spell />
+		</div>
+		<br />
+		<br />
+		<div id="stats">
+			{#each character.stats as stat}
+				{#if stat.value() > 0}
+					{stat.name} : {stat.value()}
+					<br />
+				{/if}
+			{/each}
+		</div>
+		<br />
+		<div id="equipments">
+			{#each character.equipments as equipment, i}
+				{#if equipment != undefined}
+					<button
+						class="equipment"
+						on:click={() => {
+							view = equipment;
+						}}
+					>
+						<Icon bind:equipment />
+					</button>
+				{:else}
+					<button
+						class="equipment"
+						on:click={() => {
+							slot = i;
+						}}>Vide</button
+					>
+				{/if}
+			{/each}
+		</div>
 	</div>
 </div>
+
 
 {#if view != undefined}
 	<div id="view">
@@ -85,6 +88,16 @@
 {/if}
 
 <style>
+	#window {
+		position: fixed;
+		width: 50vw;
+		height: 90vh;
+		left: 25vw;
+		top: 5vh;
+
+		background: darkgray;
+	}
+
 	#body {
 		padding: 8px;
 		text-align: center;

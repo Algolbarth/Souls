@@ -1,22 +1,35 @@
 <script>
-	export let view;
+	export let item;
 </script>
 
-<div id="body">
-	<button
-		on:click={() => {
-			view = undefined;
-		}}>Fermer</button
-	>
-	<br />
-	<br />
-	{view.name}
-	<br />
-	<br />
-	Quantité : {view.number}
+<div id="window">
+	<div id="body">
+		<button
+			on:click={() => {
+				item = undefined;
+			}}>Fermer</button
+		>
+		<br />
+		<br />
+		{item.name}
+		<br />
+		<br />
+		Quantité : {item.number}
+		<br />
+		<br />
+		<svelte:component this={item.description} bind:item />
+	</div>
 </div>
 
 <style>
+	#window {
+		position: fixed;
+		width: 50vw;
+		height: 90vh;
+		left: 25vw;
+		top: 5vh;
+	}
+
 	#body {
 		padding: 8px;
 		text-align: center;

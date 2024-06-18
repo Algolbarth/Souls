@@ -4,4 +4,4 @@
 
 Coûte 50 PE.
 <br />
-Soigne un allié de 50.
+Augmente la jauge d'initiative de tous les alliés de 25%.

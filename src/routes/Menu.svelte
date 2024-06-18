@@ -28,12 +28,18 @@
 <br />
 <button
 	on:click={() => {
-		page = 'Shop';
-	}}>Boutique</button
+		page = 'Summon';
+	}}>Invocations</button
 >
 <br />
 <button
 	on:click={() => {
-		page = 'Summon';
-	}}>Invocations</button
+		page = 'Forge';
+	}}>Forge</button
+>
+<br />
+<button
+	on:click={() => {
+		page = 'Shop';
+	}}>Boutique</button
 >

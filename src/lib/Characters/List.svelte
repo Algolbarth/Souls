@@ -3,10 +3,11 @@
 	import View from './View.svelte';
 
 	export let page;
-	export let characters = [];
-	export let equipments = [];
+	export let characters;
+	export let equipments;
 
 	let view = undefined;
+	let spell_index = 0;
 </script>
 
 <button
@@ -19,6 +20,7 @@
 {#each characters as character}
 	<button
 		on:click={() => {
+			spell_index = 0;
 			view = character;
 		}}><Icon bind:character /></button
 	>
@@ -26,19 +28,5 @@
 {/each}
 
 {#if view != undefined}
-	<div id="view">
-		<View bind:character={view} bind:equipments />
-	</div>
+	<View bind:character={view} bind:equipments bind:spell_index />
 {/if}
-
-<style>
-	#view {
-		position: fixed;
-		width: 50vw;
-		height: 90vh;
-		left: 25vw;
-		top: 5vh;
-
-		background: darkgray;
-	}
-</style>

@@ -18,7 +18,7 @@ export class Griffe extends Spell {
     };
 
     use = function (character) {
-        character.damage(this.owner.get_stat('Dégâts').value());
+        character.damage(this.owner.get_stat('Attaque').value());
         
         return this.owner.name + ' utilise Griffe sur ' + character.name;
     };

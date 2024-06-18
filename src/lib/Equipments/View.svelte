@@ -8,59 +8,60 @@
 	let view = undefined;
 </script>
 
-<div id="body">
-	<button
-		class="classic"
-		on:click={() => {
-			equipment = undefined;
-		}}>Fermer</button
-	>
-	<br />
-	<br />
-	{equipment.name} Nv {equipment.level}
-	<br />
-	<br />
-	{#if equipment.bearer != undefined}
-		Équipé sur
-		<button
-			on:click={() => {
-				view = equipment.bearer;
-			}}>{equipment.bearer.name}</button
-		>
+<div id="window">
+	<div id="body">
 		<button
 			class="classic"
 			on:click={() => {
-				equipment.bearer.unequip(equipment.slot);
 				equipment = undefined;
-
-				character = character;
-			}}>Enlever</button
+			}}>Fermer</button
 		>
 		<br />
 		<br />
-	{/if}
-	<div id="stats">
-		{equipment.stat.name} : {equipment.stat.value}
+		{equipment.name} Nv {equipment.level}
+		<br />
+		{#each Array(equipment.rank) as _}
+			*
+		{/each}
+		<br />
+		<br />
+		{#if equipment.bearer != undefined}
+			Équipé sur
+			<button
+				on:click={() => {
+					view = equipment.bearer;
+				}}>{equipment.bearer.name}</button
+			>
+			<button
+				class="classic"
+				on:click={() => {
+					equipment.bearer.unequip(equipment.slot);
+					equipment = undefined;
+	
+					character = character;
+				}}>Enlever</button
+			>
+			<br />
+			<br />
+		{/if}
+		<div id="stats">
+			{equipment.stats[0].name} : {equipment.stats[0].value}
+			<br />
+			<br />
+			{#each Array(equipment.rank) as _, i}
+				{equipment.stats[i + 1].name} : {equipment.stats[i + 1].value}
+				<br />
+			{/each}
+		</div>
 	</div>
 </div>
 
 {#if view != undefined}
-	<div id="view">
-		<View bind:character={view} bind:equipments />
-	</div>
+	<View bind:character={view} bind:equipments />
 {/if}
 
 <style>
-	#body {
-		padding: 8px;
-		text-align: center;
-	}
-
-	#stats {
-		text-align: left;
-	}
-
-	#view {
+	#window {
 		position: fixed;
 		width: 50vw;
 		height: 90vh;
@@ -68,5 +69,14 @@
 		top: 5vh;
 
 		background: darkgray;
+	}
+
+	#body {
+		padding: 8px;
+		text-align: center;
+	}
+
+	#stats {
+		text-align: left;
 	}
 </style>

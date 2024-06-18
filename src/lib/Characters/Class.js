@@ -10,7 +10,7 @@ export class Character {
         this.add_stat("Bouclier", 0);
         this.add_stat("Armure", 50);
         this.add_stat("Énergie", 100);
-        this.add_stat("Dégâts", 100);
+        this.add_stat("Attaque", 100);
         this.add_stat("Vitesse", 100);
 
         for (let i = 0; i < 6; i++) {
@@ -100,6 +100,14 @@ export class Character {
 
         this.get_stat('Vie').current -= value;
     };
+
+    heal = function (value) {
+        this.get_stat('Vie').current += value;
+        
+        if (this.get_stat('Vie').current > this.get_stat('Vie').value()) {
+            this.get_stat('Vie').current = this.get_stat('Vie').value();
+        }
+    };
 }
 
 class Stat {
@@ -116,8 +124,12 @@ class Stat {
         let total = this.base + this.add;
 
         for (const equipment of this.owner.equipments) {
-            if (equipment != undefined && equipment.stat.name == this.name) {
-                total += equipment.stat.value;
+            if (equipment != undefined) {
+                for (const stat of equipment.stats) {
+                    if (stat.name == this.name) {
+                        total += stat.value;
+                    }
+                }
             }
         }
 

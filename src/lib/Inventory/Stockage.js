@@ -15,6 +15,14 @@ export class Inventory {
         }
     }
 
+    new = function (name, number) {
+        for (let i = 0; i < this.instances.length; i++) {
+            if (this.instances[i].name == name) {
+                return new this.classes[i](number);
+            }
+        }
+    };
+
     get = function (name) {
         for (const item of this.list) {
             if (item.name == name) {
@@ -29,11 +37,7 @@ export class Inventory {
             this.get(name).number += number;
         }
         else {
-            for (let i = 0; i < this.instances.length; i++) {
-                if (this.instances[i].name == name) {
-                    this.list.push(new this.classes[i](number));
-                }
-            }
+            this.list.push(this.new(name, number));
         }
     };
 

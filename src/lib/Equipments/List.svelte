@@ -27,19 +27,5 @@
 {/each}
 
 {#if view != undefined}
-	<div id="view">
-		<View bind:equipment={view} bind:equipments />
-	</div>
+	<View bind:equipment={view} bind:equipments />
 {/if}
-
-<style>
-	#view {
-		position: fixed;
-		width: 50vw;
-		height: 90vh;
-		left: 25vw;
-		top: 5vh;
-
-		background: darkgray;
-	}
-</style>

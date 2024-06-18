@@ -1,8 +1,8 @@
 import { Spell } from '../../Spell.js';
 import Description from './Description.svelte';
 
-export class Hurlement extends Spell {
-    name = "Hurlement";
+export class VentArriere extends Spell {
+    name = "Vent arrière";
 
     constructor(owner) {
         super(owner);
@@ -26,11 +26,11 @@ export class Hurlement extends Spell {
 
     use = function () {
         for (const character of this.owner.owner.list) {
-            character.get_stat('Attaque').add += 10;
+            character.atb += 25;
         }
         
         this.owner.get_stat('Énergie').current -= 50;
 
-        return this.owner.name + ' utilise Hurlement sur lui et ses alliés';
+        return this.owner.name + ' utilise Vent arrière sur lui et ses alliées';
     };
 }
