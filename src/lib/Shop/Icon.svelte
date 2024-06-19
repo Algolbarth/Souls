@@ -1,8 +1,10 @@
 <script>
-	export let item;
 	export let inventory;
-	export let value;
 	export let view;
+	export let item;
+	export let number = 1;
+	export let money = "Crédit";
+	export let value;
 </script>
 
 <div>
@@ -19,12 +21,12 @@
 	:
 	<button
 		on:click={() => {
-			if (inventory.get('Médaille') != undefined && inventory.get('Médaille').number >= value) {
-				inventory.remove('Médaille', value);
-				inventory.add(item, 1);
+			if (inventory.get(money) != undefined && inventory.get(money).number >= value) {
+				inventory.remove(money, value);
+				inventory.add(item, number);
 
 				inventory = inventory;
 			}
-		}}>{value} Médailles</button
+		}}>{value} {money}</button
 	>
 </div>

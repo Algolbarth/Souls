@@ -5,6 +5,7 @@
 <div id="window">
 	<div id="body">
 		<button
+			class="classic"
 			on:click={() => {
 				item = undefined;
 			}}>Fermer</button
@@ -25,14 +26,15 @@
 	#window {
 		position: fixed;
 		width: 50vw;
-		height: 90vh;
+		height: 50vh;
 		left: 25vw;
-		top: 5vh;
+		top: 25vh;
+
+		background: darkgray;
 	}
 
 	#body {
 		padding: 8px;
 		text-align: center;
-		background: darkgray;
 	}
 </style>

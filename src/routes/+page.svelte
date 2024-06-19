@@ -1,26 +1,25 @@
 <script>
-	import MenuView from './Menu.svelte';
-	import ArenaView from './Arena.svelte';
-	import TeamsView from '../lib/Teams/List.svelte';
-	import EditView from '../lib/Teams/Edit.svelte';
-	import AddView from '../lib/Teams/Add.svelte';
-	import BattleView from '../lib/Battle/Main.svelte';
-	import CharactersView from '../lib/Characters/List.svelte';
-	import ShopView from '../lib/Shop/List.svelte';
-	import ForgeView from '../lib/Forge/List.svelte';
-	import InventoryView from '../lib/Inventory/List.svelte';
-	import SummonView from '../lib/Summon/List.svelte';
-	import EquipmentsView from '../lib/Equipments/List.svelte';
+	import Menu from './Menu.svelte';
+	import Arena from './Arena.svelte';
+	import Explore from './Explore.svelte';
+	import Teams from '../lib/Teams/List.svelte';
+	import Battle from '../lib/Battle/Main.svelte';
+	import Characters from '../lib/Characters/List.svelte';
+	import Shop from '../lib/Shop/List.svelte';
+	import Forge from '../lib/Forge/List.svelte';
+	import Inventory from '../lib/Inventory/List.svelte';
+	import Summon from '../lib/Summon/List.svelte';
+	import Equipments from '../lib/Equipments/List.svelte';
 
-	import { Characters } from '../lib/Characters/Stockage.js';
-	import { Inventory } from '../lib/Inventory/Stockage.js';
-	import { Equipments } from '../lib/Equipments/Stockage.js';
+	import { Characters as CharactersClass } from '../lib/Characters/Stockage.js';
+	import { Inventory as InventoryClass } from '../lib/Inventory/Stockage.js';
+	import { Equipments as EquipmentsClass } from '../lib/Equipments/Stockage.js';
 
 	let page = 'Menu';
 	let battle = undefined;
 	let ranking = 0;
 
-	let characters = new Characters();
+	let characters = new CharactersClass();
 	for (const instance of characters.instances) {
 		characters.add(instance.name);
 	}
@@ -28,40 +27,39 @@
 	let teams = [];
 	teams.push({ name: 'Équipe', list: [characters.list[0], characters.list[1]] });
 	let team_active = teams[0];
-	let team_view = undefined;
 
-	let inventory = new Inventory();
+	let inventory = new InventoryClass();
 	inventory.add('Parchemin', 3);
 
-	let equipments = new Equipments();
-	equipments.new();
+	let equipments = new EquipmentsClass();
+	for (let i = 0; i < 6; i++) {
+		equipments.new(1, 1, i);
+	}
 </script>
 
 <div id="body">
 	{#if page == 'Menu'}
-		<MenuView bind:page />
+		<Menu bind:page />
+	{:else if page == 'Explore'}
+		<Explore bind:page bind:battle bind:characters bind:teams />
 	{:else if page == 'Arena'}
-		<ArenaView bind:page bind:battle bind:characters bind:teams bind:ranking bind:inventory />
+		<Arena bind:page bind:battle bind:characters bind:teams bind:ranking />
 	{:else if page == 'Teams'}
-		<TeamsView bind:page bind:teams bind:team_active bind:team_view />
-	{:else if page == 'Edit'}
-		<EditView bind:page bind:team={team_view} />
-	{:else if page == 'Add'}
-		<AddView bind:page bind:team={team_view} bind:characters />
+		<Teams bind:page bind:teams bind:team_active bind:characters bind:equipments bind:inventory />
 	{:else if page == 'Battle'}
-		<BattleView bind:page bind:battle bind:ranking bind:inventory />
+		<Battle bind:page bind:battle bind:ranking bind:inventory bind:equipments />
 	{:else if page == 'Character'}
-		<CharactersView bind:page bind:characters={characters.list} bind:equipments={equipments.list} />
+		<Characters bind:page bind:characters bind:equipments bind:inventory />
 	{:else if page == 'Equipment'}
-		<EquipmentsView bind:page bind:equipments />
+		<Equipments bind:page bind:equipments bind:inventory />
 	{:else if page == 'Inventory'}
-		<InventoryView bind:page bind:inventory />
+		<Inventory bind:page bind:inventory />
 	{:else if page == 'Shop'}
-		<ShopView bind:page bind:inventory />
+		<Shop bind:page bind:inventory />
 	{:else if page == 'Forge'}
-		<ForgeView bind:page bind:inventory bind:equipments />
+		<Forge bind:page bind:inventory bind:equipments />
 	{:else if page == 'Summon'}
-		<SummonView bind:page bind:inventory bind:characters bind:equipments={equipments.list} />
+		<Summon bind:page bind:inventory bind:characters bind:equipments />
 	{/if}
 </div>
 

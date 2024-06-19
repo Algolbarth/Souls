@@ -18,12 +18,12 @@
 </button>
 <br />
 <br />
-{#if inventory.get('Médaille') != undefined}
-	{inventory.get('Médaille').number}
+{#if inventory.get('Débris') != undefined}
+	{inventory.get('Débris').number}
 {:else}
 	0
 {/if}
-Médailles
+Débris
 <br />
 <br />
 Niveau <input type="number" min="1" bind:value={level} />
@@ -32,13 +32,13 @@ Niveau <input type="number" min="1" bind:value={level} />
 Équipement aléatoire :
 <button
 	on:click={() => {
-		if (inventory.get('Médaille') != undefined && inventory.get('Médaille').number >= 2 * level) {
-			inventory.remove('Médaille', 2 * level);
+		if (inventory.get('Débris') != undefined && inventory.get('Débris').number >= 2 * level) {
+			inventory.remove('Débris', 2 * level);
 			equipments.new(level);
 
 			inventory = inventory;
 		}
-	}}>{2 * level} Médailles</button
+	}}>{2 * level} Débris</button
 >
 
 {#if view != undefined}

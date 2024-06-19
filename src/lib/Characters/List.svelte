@@ -5,6 +5,7 @@
 	export let page;
 	export let characters;
 	export let equipments;
+	export let inventory;
 
 	let view = undefined;
 	let spell_index = 0;
@@ -17,7 +18,7 @@
 >
 <br />
 <br />
-{#each characters as character}
+{#each characters.list as character}
 	<button
 		on:click={() => {
 			spell_index = 0;
@@ -28,5 +29,5 @@
 {/each}
 
 {#if view != undefined}
-	<View bind:character={view} bind:equipments bind:spell_index />
+	<View bind:character={view} bind:characters bind:equipments bind:inventory bind:spell_index />
 {/if}

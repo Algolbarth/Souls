@@ -1,9 +1,12 @@
 <script>
 	import Display from './Display.svelte';
+	import Victory from './Victory.svelte';
+
 	export let page;
 	export let battle;
 	export let ranking;
 	export let inventory;
+	export let equipments;
 
 	$: isDefeat = function () {
 		for (const character of battle.player.list) {
@@ -47,7 +50,7 @@
 				for (const character of camp.list) {
 					if (character.alive()) {
 						character.atb += character.get_stat('Vitesse').value() / 100;
-						character.atb = parseFloat((character.atb).toFixed(2));
+						character.atb = parseFloat(character.atb.toFixed(2));
 					}
 				}
 			}
@@ -92,19 +95,11 @@
 			>
 		{:else}
 			{#each active.spells as s}
-				{#if spell == s}
-					<button
-						on:click={() => {
-							spell = s;
-						}}>{s.name}</button
-					>
-				{:else}
-					<button
-						on:click={() => {
-							spell = s;
-						}}>{s.name}</button
-					>
-				{/if}
+				<button
+					on:click={() => {
+						spell = s;
+					}}>{s.name}</button
+				>
 				<br />
 			{/each}
 
@@ -117,17 +112,7 @@
 		{/if}
 	</div>
 {:else if !isDefeat() && isVictory()}
-	+ 5 rangs
-	<br/>
-	+ 3 médailles
-	<br/>
-	<button
-		on:click={() => {
-			ranking += 5;
-			inventory.add("Médaille", 3);
-			page = 'Arena';
-		}}>Victoire</button
-	>
+	<Victory bind:page bind:battle bind:ranking bind:inventory bind:equipments />
 {:else}
 	<button
 		on:click={() => {

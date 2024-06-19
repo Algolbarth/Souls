@@ -15,8 +15,8 @@ export class Characters {
         }
     }
 
-    add = function (name) {
-        let result = this.get(name);
+    add = function (name, rank) {
+        let result = this.get(name, rank);
         if (result != undefined) {
             this.list.push(result);
         }
@@ -25,12 +25,21 @@ export class Characters {
         }
     };
 
-    get = function (name) {
+    get = function (name, rank) {
         for (let i = 0; i < this.instances.length; i++) {
             if (this.instances[i].name == name) {
-                return new this.classes[i]();
+                return new this.classes[i](rank);
             }
         }
         return undefined;
+    };
+
+    remove = function (character) {
+        for (let i = 0; i < this.list.length; i++) {
+            if (this.list[i] == character) {
+                this.list.splice(i, 1);
+                break;
+            }
+        }
     };
 }

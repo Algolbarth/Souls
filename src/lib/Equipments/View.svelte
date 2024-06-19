@@ -4,6 +4,7 @@
 	export let equipment;
 	export let equipments;
 	export let character = undefined;
+	export let inventory = undefined;
 
 	let view = undefined;
 </script>
@@ -37,12 +38,23 @@
 				on:click={() => {
 					equipment.bearer.unequip(equipment.slot);
 					equipment = undefined;
-	
+
 					character = character;
 				}}>Enlever</button
 			>
 			<br />
 			<br />
+		{:else}
+			<button
+				class="classic"
+				on:click={() => {
+					inventory.add('Débris', equipment.level);
+					equipments.remove(equipment);
+
+					equipment = undefined;
+					equipments = equipments;
+				}}>Vendre</button
+			>
 		{/if}
 		<div id="stats">
 			{equipment.stats[0].name} : {equipment.stats[0].value}
@@ -57,7 +69,7 @@
 </div>
 
 {#if view != undefined}
-	<View bind:character={view} bind:equipments />
+	<View bind:character={view} bind:equipments bind:inventory />
 {/if}
 
 <style>

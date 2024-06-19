@@ -2,4 +2,8 @@
 	export let character;
 </script>
 
-{character.name} Nv {character.level}
+{character.name}
+{#each Array(character.rank) as _}
+    *
+{/each}
+Nv {character.level}

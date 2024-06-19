@@ -4,6 +4,7 @@
 
 	export let page;
 	export let equipments;
+	export let inventory;
 
 	let view = undefined;
 </script>
@@ -27,5 +28,5 @@
 {/each}
 
 {#if view != undefined}
-	<View bind:equipment={view} bind:equipments />
+	<View bind:equipment={view} bind:equipments bind:inventory/>
 {/if}

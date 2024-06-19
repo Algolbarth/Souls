@@ -5,7 +5,9 @@ export class Character {
     spells = [];
     equipments = [];
 
-    constructor() {
+    constructor(rank = 1) {
+        this.rank = rank;
+
         this.add_stat("Vie", 100);
         this.add_stat("Bouclier", 0);
         this.add_stat("Armure", 50);
@@ -78,6 +80,14 @@ export class Character {
     unequip = function (slot) {
         this.equipments[slot].bearer = undefined;
         this.equipments[slot] = undefined;
+    };
+
+    unequip_all = function () {
+        for (let i = 0; i < 6; i++) {
+            if (this.equipments[i] != undefined) {
+                this.unequip(i);
+            }
+        }
     };
 
     alive = function () {

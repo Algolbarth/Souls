@@ -59,7 +59,7 @@
 </div>
 
 {#if view != undefined}
-	<View bind:character={view} bind:spell_index bind:equipments />
+	<View bind:character={view} bind:spell_index bind:equipments bind:inventory />
 {/if}
 
 <style>

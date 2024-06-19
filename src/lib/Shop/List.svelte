@@ -4,7 +4,6 @@
 
 	export let page;
 	export let inventory;
-	export let equipments;
 
 	let view = undefined;
 </script>
@@ -18,6 +17,13 @@
 </button>
 <br />
 <br />
+{#if inventory.get('Crédit') != undefined}
+	{inventory.get('Crédit').number}
+{:else}
+	0
+{/if}
+Crédits
+<br />
 {#if inventory.get('Médaille') != undefined}
 	{inventory.get('Médaille').number}
 {:else}
@@ -26,7 +32,8 @@
 Médailles
 <br />
 <br />
-<Icon item={"Parchemin"} bind:inventory value={10} bind:view />
+<Icon bind:inventory bind:view item={"Débris"} number={10} value={250} />
+<Icon bind:inventory bind:view item={"Parchemin"} money="Médaille" value={10} />
 
 {#if view != undefined}
 	<View bind:item={view} />

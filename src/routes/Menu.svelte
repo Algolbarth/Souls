@@ -4,8 +4,21 @@
 
 <button
 	on:click={() => {
+		page = 'Explore';
+	}}>Explorer</button
+>
+<br />
+<button
+	on:click={() => {
 		page = 'Arena';
 	}}>Arène</button
+>
+<br />
+<br />
+<button
+	on:click={() => {
+		page = 'Teams';
+	}}>Équipes</button
 >
 <br />
 <button
@@ -26,6 +39,7 @@
 	}}>Inventaire</button
 >
 <br />
+<br />
 <button
 	on:click={() => {
 		page = 'Summon';
@@ -37,6 +51,7 @@
 		page = 'Forge';
 	}}>Forge</button
 >
+<br />
 <br />
 <button
 	on:click={() => {

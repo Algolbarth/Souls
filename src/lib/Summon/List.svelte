@@ -31,6 +31,7 @@
 </button>
 <br />
 <br />
+Invocation classique :
 {#if inventory.get('Parchemin') != undefined}
 	{inventory.get('Parchemin').number}
 	x

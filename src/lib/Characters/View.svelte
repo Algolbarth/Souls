@@ -4,8 +4,10 @@
 	import Icon from '../Equipments/Icon.svelte';
 
 	export let character;
+	export let characters;
 	export let spell_index;
 	export let equipments;
+	export let inventory;
 
 	$: spell = character.spells[spell_index];
 
@@ -24,6 +26,10 @@
 		<br />
 		<br />
 		{character.name} Nv {character.level}
+		<br />
+		{#each Array(character.rank) as _}
+			*
+		{/each}
 		<br />
 		<br />
 		{#each character.spells as s, i}
@@ -71,19 +77,37 @@
 				{/if}
 			{/each}
 		</div>
+		<br />
+		<button
+			class="classic"
+			on:click={() => {
+				character.unequip_all();
+
+				character = character;
+			}}>Tout enlever</button
+		>
+		<br />
+		<br />
+		<button
+			class="classic"
+			on:click={() => {
+				character.unequip_all();
+				characters.remove(character);
+
+				character = undefined;
+				characters = characters;
+			}}>Vendre</button
+		>
 	</div>
 </div>
 
-
 {#if view != undefined}
-	<div id="view">
-		<View bind:equipment={view} bind:equipments bind:character />
-	</div>
+	<View bind:equipment={view} bind:equipments bind:inventory bind:character />
 {/if}
 
 {#if slot != undefined}
 	<div id="select">
-		<Select bind:character bind:slot bind:equipments />
+		<Select bind:character bind:slot bind:equipments bind:inventory />
 	</div>
 {/if}
 
@@ -115,28 +139,8 @@
 	#equipments {
 		text-align: left;
 
-		display:grid;
+		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-	}
-
-	#view {
-		position: fixed;
-		width: 50vw;
-		height: 90vh;
-		left: 25vw;
-		top: 5vh;
-
-		background: darkgray;
-	}
-
-	#select {
-		position: fixed;
-		width: 100vw;
-		height: 100vh;
-		left: 0;
-		top: 0;
-
-		background: white;
 	}
 
 	.equipment {
